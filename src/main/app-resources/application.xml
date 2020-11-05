@@ -1,0 +1,21 @@
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="application">
+  <jobTemplates>
+    <jobTemplate id="notebook">
+      <streamingExecutable>/application/notebook/run</streamingExecutable>
+      <defaultParameters><parameter id="aoi" title="WKT Polygon for the Bounding Box in EPSG:32610" abstract="Set the value of WKT Polygon" maxOccurs="1" scope="runtime" type="LiteralData">POLYGON ((456037.4350113738 4837015.1639622, 456037.4350113738 4855174.452151849, 425620.7027991246 4855174.452151849, 425620.7027991246 4837015.1639622, 456037.4350113738 4837015.1639622))</parameter></defaultParameters>
+     <defaultJobconf>
+        <property id="mapred.task.timeout">9900000000000</property>
+        <property id="ciop.job.max.tasks">1</property> 
+     </defaultJobconf>
+    </jobTemplate>
+  </jobTemplates>
+  <workflow id="ewf-notebook-stagein-2" title="Landslide mapping with Deep Learning algorithms applied to EO data" abstract="This application takes Sentinel-2 and ALO DEM to generate a landslide mask">
+    <workflowVersion>1.0</workflowVersion>
+    <node id="notebook">
+      <job id="notebook"/>
+      <sources>
+        <source id="source" title="Input references" abstract="Input references" refid="string:list" scope="runtime">https://catalog.terradue.com/sentinel2/search?format=atom&amp;uid=S2B_MSIL1C_20200412T185909_N0209_R013_T10TDP_20200412T221853,https://catalog.terradue.com/alos-dem/search?format=atom&amp;uid=N043W124</source>
+      </sources>
+    </node>
+  </workflow>
+</application>
